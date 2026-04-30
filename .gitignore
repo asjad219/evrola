@@ -1,0 +1,10 @@
+node_modules/
+.env
+.env.local
+.env.*.local
+*.log
+.DS_Store
+.vercel
+dist/node_modules/
+.chrome-headless/
+.edge-headless/
