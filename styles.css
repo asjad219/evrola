@@ -38,6 +38,49 @@ body {
   color: transparent;
 }
 
+.mobile-menu {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background:
+    linear-gradient(180deg, rgba(7, 14, 22, 0.82), rgba(7, 14, 22, 0.92)),
+    rgba(7, 14, 22, 0.88);
+}
+
+.mobile-menu-panel {
+  min-height: auto;
+  width: min(420px, calc(100% - 32px));
+  margin: 92px auto 0;
+  padding: 28px 24px;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04)),
+    rgba(12, 22, 36, 0.84);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow:
+    0 24px 54px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.mobile-menu-panel a {
+  color: #f1f1ee;
+  padding: 6px 0;
+}
+
+.mobile-menu-panel .button {
+  width: 100%;
+  margin-top: 10px;
+}
+
+@media (max-width: 720px) {
+  .mobile-menu-panel {
+    margin-top: 84px;
+    padding: 22px 20px;
+  }
+}
+
 .case-study-card {
   min-height: auto;
   padding: 18px;
