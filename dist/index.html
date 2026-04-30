@@ -2,20 +2,581 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="InfuSyn builds HVAC and plumbing websites that turn clicks into booked jobs with conversion-focused design and AI receptionist systems."
+      content="Evrola builds HVAC and plumbing websites that turn clicks into booked jobs with conversion-focused design and AI receptionist systems."
     />
-    <title>InfuSyn | HVAC & Plumbing Growth Websites</title>
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <script type="module" crossorigin src="/assets/index-Ke9rzcmM.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-CcUoEHq0.css">
+    <title>Evrola | HVAC & Plumbing Growth Websites</title>
+    <link rel="icon" href="/assets/favicon-D_T0M3TB.svg" type="image/svg+xml" />
+    <link rel="stylesheet" crossorigin href="/assets/index-r080qmhc.css">
   </head>
   <body>
-    <div id="root"></div>
+    <div class="app-shell">
+      <div class="emergency-ribbon" id="emergency-ribbon">
+        <div class="container emergency-inner">
+          <a href="#ai-demo">
+            <span class="pulse-dot"></span>
+            Missing after-hours leads? See the 24/7 AI receptionist demo.
+          </a>
+          <button
+            type="button"
+            class="ribbon-dismiss"
+            id="dismiss-ribbon"
+            aria-label="Dismiss ribbon"
+          >
+            ×
+          </button>
+        </div>
+      </div>
+
+      <header class="site-header" id="site-header">
+        <div class="container nav-inner">
+          <a class="brand" href="#top" aria-label="Evrola home">
+            <span class="brand-mark">
+              <span class="brand-pipe"></span>
+              <span class="brand-flame"></span>
+            </span>
+            <span>Evrola</span>
+          </a>
+
+          <nav class="desktop-nav" aria-label="Primary" id="desktop-nav"></nav>
+
+          <div class="nav-actions">
+            <a class="button button-orange compact" href="#contact">
+              Get Your Free Audit
+            </a>
+            <button
+              class="menu-button"
+              type="button"
+              id="menu-button"
+              aria-expanded="false"
+              aria-label="Toggle menu"
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="mobile-menu" id="mobile-menu">
+          <div class="mobile-menu-panel" id="mobile-menu-panel"></div>
+        </div>
+      </header>
+
+      <main id="top">
+        <section class="hero-section">
+          <div class="hero-glow"></div>
+          <div class="container hero-grid">
+            <div class="hero-copy" data-reveal>
+              <div class="eyebrow-pill">HVAC & Plumbing Web Design Specialists</div>
+              <h1>
+                We Build Websites That Make Your Phone
+                <span class="gradient-text">Ring</span>
+              </h1>
+              <p class="hero-lead">
+                Conversion-first websites and AI booking systems for US HVAC and
+                plumbing companies. No fluff. Real leads. Real trust. Real booked
+                jobs.
+              </p>
+              <div class="hero-actions">
+                <a class="button button-blue" href="#portfolio">See Our Work</a>
+                <a class="button button-outline" href="#contact">Get Free Audit</a>
+              </div>
+              <div class="trust-row">
+                <span>4.9/5 from 47 clients</span>
+                <span>Avg. 2.3x more calls in 60 days</span>
+                <span>Built for serious growth</span>
+              </div>
+            </div>
+
+            <div class="hero-visual" data-reveal>
+              <div class="device-card desktop-device">
+                <div class="device-screen">
+                  <div class="mockup-topbar">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                  <div class="mockup-site">
+                    <div class="mockup-hero">
+                      <div class="mockup-kicker"></div>
+                      <div class="mockup-title"></div>
+                      <div class="mockup-title short"></div>
+                      <div class="mockup-metrics">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                      </div>
+                    </div>
+                    <div class="mockup-columns">
+                      <div class="mockup-card large"></div>
+                      <div class="mockup-card"></div>
+                      <div class="mockup-card accent"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="device-card mobile-device">
+                <div class="device-screen mobile">
+                  <div class="mockup-title tiny"></div>
+                  <div class="mockup-card accent tall"></div>
+                  <div class="mockup-card"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="marquee-section">
+          <div class="container">
+            <div class="section-label centered">
+              Trusted by home service companies across the US
+            </div>
+          </div>
+          <div class="marquee-wrap brands">
+            <div class="marquee-row">
+              <div class="marquee-track" id="brands-row-1"></div>
+            </div>
+            <div class="marquee-row reverse">
+              <div class="marquee-track" id="brands-row-2"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="services">
+          <div class="container">
+            <div class="section-header" data-reveal>
+              <div class="section-label">What we build for you</div>
+              <h2>Every tool your business needs to dominate local search.</h2>
+              <p>
+                We combine premium design, practical UX, local SEO architecture,
+                and automation that keeps leads from dying after hours.
+              </p>
+            </div>
+
+            <div class="bento-grid" id="services-grid"></div>
+          </div>
+        </section>
+
+        <section class="section portfolio-section" id="portfolio">
+          <div class="container">
+            <div class="section-header" data-reveal>
+              <div class="section-label">Proof it works</div>
+              <h2>Real websites. Real results. Real HVAC and plumbing companies.</h2>
+              <p>
+                Every case study is designed to show transformation, not just pretty
+                screens. Better speed, better trust, better conversion flow.
+              </p>
+            </div>
+
+            <div class="slider-card" data-reveal>
+              <div class="slider-top">
+                <div>
+                  <div class="section-label">Before / After proof</div>
+                  <h3>See how Evrola turns dead pages into booked-job funnels.</h3>
+                </div>
+                <div class="score-chips">
+                  <span class="chip chip-bad">Before 32</span>
+                  <span class="chip chip-good">After 98</span>
+                </div>
+              </div>
+              <div class="before-after">
+                <div class="screen before">
+                  <span class="screen-label">Old Site - Losing Leads</span>
+                  <div class="screen-content old">
+                    <div class="compare-ui compare-old">
+                      <div class="compare-topbar">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                      </div>
+                      <div class="compare-old-layout">
+                        <div class="compare-old-sidebar">
+                          <div class="line-block short"></div>
+                          <div class="line-block"></div>
+                          <div class="line-block short"></div>
+                          <div class="line-block"></div>
+                        </div>
+                        <div class="compare-old-main">
+                          <div class="compare-old-hero"></div>
+                          <div class="compare-old-rows">
+                            <div class="row-line"></div>
+                            <div class="row-line"></div>
+                            <div class="row-line short"></div>
+                          </div>
+                          <div class="compare-old-cards">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="screen after overlay" id="after-screen">
+                  <span class="screen-label">New Site - More Calls</span>
+                  <div class="screen-content new">
+                    <div class="compare-ui compare-new">
+                      <div class="compare-topbar">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                      </div>
+                      <div class="compare-new-hero">
+                        <div class="compare-badge"></div>
+                        <div class="compare-title"></div>
+                        <div class="compare-title short"></div>
+                        <div class="compare-chip-row">
+                          <span></span>
+                          <span></span>
+                          <span></span>
+                        </div>
+                      </div>
+                      <div class="compare-new-grid">
+                        <div class="compare-panel tall"></div>
+                        <div class="compare-panel accent"></div>
+                        <div class="compare-panel"></div>
+                        <div class="compare-panel small"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="slider-handle" id="slider-handle" aria-hidden="true"></div>
+                <input
+                  id="comparison-slider"
+                  aria-label="Before and after comparison"
+                  class="slider-range"
+                  max="100"
+                  min="0"
+                  type="range"
+                  value="56"
+                />
+              </div>
+            </div>
+
+            <div class="portfolio-grid" id="portfolio-grid"></div>
+
+            <div class="section-cta">
+              <a class="text-link large" href="#contact">See all 12 case studies</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="section process-section" id="process">
+          <div class="container">
+            <div class="section-header" data-reveal>
+              <div class="section-label">How it works</div>
+              <h2>From first call to more bookings in 21 days.</h2>
+            </div>
+            <div class="timeline" data-reveal id="timeline"></div>
+          </div>
+        </section>
+
+        <section class="section ai-section" id="ai-demo">
+          <div class="container ai-grid">
+            <div class="section-header narrow" data-reveal>
+              <div class="section-label">AI receptionist demo</div>
+              <h2>The upsell your competitors still do not offer.</h2>
+              <p>
+                Evrola turns missed calls into booked appointments with a workflow
+                that qualifies leads, checks availability, sends confirmations, and
+                logs every interaction.
+              </p>
+              <div class="tech-stack">
+                <span>n8n</span>
+                <span>OpenAI</span>
+                <span>Twilio</span>
+                <span>Google Calendar</span>
+                <span>Supabase</span>
+              </div>
+            </div>
+
+            <div class="chat-demo" data-reveal>
+              <div class="chat-header">
+                <div>
+                  <strong>Evrola Reception Desk</strong>
+                  <span>Live workflow preview</span>
+                </div>
+                <span class="status-dot">Online 24/7</span>
+              </div>
+              <div class="chat-body">
+                <div class="chat-bubble assistant">
+                  Hi, this is the Evrola AI receptionist. What do you need help
+                  with today?
+                </div>
+                <div class="chat-bubble user">
+                  My AC stopped working and I need someone tomorrow.
+                </div>
+                <div class="chat-bubble assistant">
+                  Got it. What city are you in, and is this an emergency with no
+                  cooling right now?
+                </div>
+                <div class="chat-bubble assistant">
+                  After qualification, the workflow checks your calendar, offers two
+                  slots, then texts a confirmation to the customer and business owner.
+                </div>
+              </div>
+              <div class="workflow-strip">
+                <span>Capture</span>
+                <span>Qualify</span>
+                <span>Check calendar</span>
+                <span>Book</span>
+                <span>Notify owner</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section testimonial-section">
+          <div class="container">
+            <div class="section-header" data-reveal>
+              <div class="section-label">Voice of clients</div>
+              <h2>What HVAC and plumbing owners are saying.</h2>
+            </div>
+          </div>
+          <div class="marquee-wrap testimonials">
+            <div class="marquee-row">
+              <div class="marquee-track" id="testimonials-row-1"></div>
+            </div>
+            <div class="marquee-row reverse">
+              <div class="marquee-track" id="testimonials-row-2"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section pricing-section" id="pricing">
+          <div class="container">
+            <div class="section-header" data-reveal>
+              <div class="section-label">The offer</div>
+              <h2>Transparent pricing. No surprises. Just results.</h2>
+              <p>
+                Clear tiers help pre-qualify serious leads and make your process feel
+                more trustworthy before the first call.
+              </p>
+            </div>
+
+            <div class="pricing-grid" id="pricing-grid"></div>
+            <p class="pricing-footnote">
+              50% upfront. 50% on launch. Money-back design guarantee if we miss the
+              approved direction.
+            </p>
+          </div>
+        </section>
+
+        <section class="section faq-section">
+          <div class="container">
+            <div class="section-header" data-reveal>
+              <div class="section-label">FAQ</div>
+              <h2>Everything HVAC and plumbing owners ask before hiring us.</h2>
+            </div>
+            <div class="faq-search-wrap" data-reveal>
+              <input
+                class="faq-search"
+                id="faq-search"
+                placeholder="Search questions..."
+                type="search"
+              />
+            </div>
+            <div class="faq-list" id="faq-list"></div>
+          </div>
+        </section>
+
+        <section class="section insights-section" id="insights">
+          <div class="container">
+            <div class="section-header" data-reveal>
+              <div class="section-label">Blog / insights</div>
+              <h2>Short-form authority content built for skeptical buyers.</h2>
+            </div>
+            <div class="insight-grid" id="insights-grid"></div>
+          </div>
+        </section>
+
+        <section class="cta-banner">
+          <div class="cta-orb cta-orb-left"></div>
+          <div class="cta-orb cta-orb-right"></div>
+          <div class="container cta-banner-inner">
+            <div class="cta-copy">
+              <div class="section-label inverse">Ready to get more booked jobs?</div>
+              <h2>Build a site that works after business hours too.</h2>
+              <p>
+                Turn missed calls into booked appointments with premium design,
+                mobile-first funnels, and a glass-smooth AI receptionist experience.
+              </p>
+              <div class="cta-points">
+                <span>24/7 lead capture</span>
+                <span>Launch in 21 days</span>
+                <span>Built for mobile calls</span>
+              </div>
+            </div>
+            <div class="cta-glass-stack">
+              <div class="cta-glass-card primary">
+                <div class="cta-card-label">Growth Snapshot</div>
+                <strong>+2.3x</strong>
+                <p>Average lift in calls after redesigning the funnel and trust flow.</p>
+                <a class="button button-inverse" href="#contact">Get Your Free Audit</a>
+              </div>
+              <div class="cta-glass-card secondary">
+                <span class="mini-tag">Always on</span>
+                <div class="mini-card-copy">
+                  <strong>AI Receptionist</strong>
+                  <p>Captures, qualifies, books, and alerts your team after hours.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section contact-section" id="contact">
+          <div class="container contact-grid">
+            <div class="section-header narrow" data-reveal>
+              <div class="section-label">Free audit</div>
+              <h2>Tell us where your current website is letting leads slip.</h2>
+              <p>
+                Send your site and service area. We will respond with the three
+                biggest conversion and trust issues holding it back.
+              </p>
+              <div class="contact-points">
+                <span>hello@evrola.co</span>
+                <span>(555) 014-8821</span>
+                <span>Built for US home service companies</span>
+              </div>
+            </div>
+            <form class="audit-form" data-reveal id="audit-form">
+              <label>
+                Your name
+                <input name="name" placeholder="Alex Carter" required type="text" />
+              </label>
+              <label>
+                Business email
+                <input
+                  name="email"
+                  placeholder="owner@yourcompany.com"
+                  required
+                  type="email"
+                />
+              </label>
+              <label>
+                Current website
+                <input
+                  name="website"
+                  placeholder="https://yourcompany.com"
+                  required
+                  type="url"
+                />
+              </label>
+              <label>
+                Service area
+                <input
+                  name="location"
+                  placeholder="Phoenix metro, AZ"
+                  required
+                  type="text"
+                />
+              </label>
+              <label>
+                What do you want more of?
+                <textarea
+                  name="goal"
+                  placeholder="More calls, better mobile speed, help with missed after-hours leads..."
+                  rows="4"
+                ></textarea>
+              </label>
+              <button class="button button-blue full" type="submit">
+                Request My Free Audit
+              </button>
+              <p class="form-message" id="audit-message">
+                Audit request saved locally. Your form flow is ready to connect to
+                email, Supabase, or an n8n webhook.
+              </p>
+            </form>
+          </div>
+        </section>
+      </main>
+
+      <aside class="floating-quote" id="floating-quote">
+        <div class="quote-header">
+          <div class="quote-copy">
+            <strong>Quick Quote Request</strong>
+            <span>Highest-converting side form</span>
+          </div>
+          <button
+            type="button"
+            class="quote-toggle"
+            id="quote-toggle"
+            aria-expanded="true"
+            aria-controls="quote-form"
+            aria-label="Minimize quote form"
+            title="Minimize"
+          >
+            &minus;
+          </button>
+        </div>
+        <form id="quote-form">
+          <input name="name" placeholder="Name" required type="text" />
+          <input name="phone" placeholder="Phone" required type="tel" />
+          <select name="service" required>
+            <option value="" selected disabled>Service type</option>
+            <option>HVAC redesign</option>
+            <option>Plumbing redesign</option>
+            <option>Website + AI receptionist</option>
+          </select>
+          <input name="time" placeholder="Best time to call" required type="text" />
+          <button class="button button-blue full" type="submit">
+            Get My Free Quote
+          </button>
+          <p class="form-message" id="quote-message">
+            Quote request saved locally and ready for webhook wiring.
+          </p>
+        </form>
+      </aside>
+
+      <footer class="site-footer">
+        <div class="container footer-grid">
+          <div>
+            <a class="brand footer-brand" href="#top">
+              <span class="brand-mark">
+                <span class="brand-pipe"></span>
+                <span class="brand-flame"></span>
+              </span>
+              <span>Evrola</span>
+            </a>
+            <p>
+              We build 24/7 lead-generation websites for HVAC and plumbing
+              businesses that want more booked jobs, not just prettier pages.
+            </p>
+          </div>
+          <div>
+            <h3>Navigation</h3>
+            <div class="footer-links" id="footer-links"></div>
+          </div>
+          <div>
+            <h3>Contact</h3>
+            <div class="footer-links">
+              <a href="mailto:hello@evrola.co">hello@evrola.co</a>
+              <a href="tel:+15550148821">(555) 014-8821</a>
+              <a href="#ai-demo">See AI Receptionist Demo</a>
+              <a href="#pricing">Explore Pricing</a>
+            </div>
+          </div>
+        </div>
+        <div class="container footer-bottom">
+          <span>© 2026 Evrola. All rights reserved.</span>
+          <div>
+            <a href="#top">Privacy Policy</a>
+            <span>Built with care for US home service companies.</span>
+          </div>
+        </div>
+      </footer>
+
+      <div class="mobile-cta-bar">
+        <a href="tel:+15550148821">Call Now</a>
+        <a href="#ai-demo">Chat Now</a>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
   </body>
   </html>
