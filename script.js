@@ -282,13 +282,20 @@ const storage = {
 
 function renderNav() {
   const navHtml = navLinks.map((link) => `<a href="${link.href}">${link.label}</a>`).join("");
+  const mobilePanel = document.getElementById("mobile-menu-panel");
 
   document.getElementById("desktop-nav").innerHTML = navHtml;
   document.getElementById("footer-links").innerHTML = navHtml;
-  document.getElementById("mobile-menu-panel").innerHTML = `
-    ${navLinks.map((link) => `<a href="${link.href}" class="mobile-link">${link.label}</a>`).join("")}
-    <a class="button button-orange" href="#contact">Get Your Free Audit</a>
-  `;
+
+  if (mobilePanel) {
+    mobilePanel.insertAdjacentHTML(
+      "beforeend",
+      `
+        ${navLinks.map((link) => `<a href="${link.href}" class="mobile-link">${link.label}</a>`).join("")}
+        <a class="button button-orange" href="#contact">Get Your Free Audit</a>
+      `,
+    );
+  }
 }
 
 function renderMarquee(targetId, items) {
@@ -627,12 +634,19 @@ function initHeader() {
   const dismiss = document.getElementById("dismiss-ribbon");
   const menuButton = document.getElementById("menu-button");
   const menu = document.getElementById("mobile-menu");
+  const menuPanel = document.getElementById("mobile-menu-panel");
+  const menuClose = document.getElementById("mobile-menu-close");
 
-  if (!header || !dismiss || !menuButton || !menu) {
+  if (!header || !dismiss || !menuButton || !menu || !menuPanel || !menuClose) {
     return;
   }
 
   dismiss.innerHTML = "&times;";
+
+  const closeMenu = () => {
+    menu.classList.remove("open");
+    menuButton.setAttribute("aria-expanded", "false");
+  };
 
   const update = () => {
     if (window.scrollY > 60) {
@@ -652,17 +666,23 @@ function initHeader() {
     menuButton.setAttribute("aria-expanded", String(isOpen));
   });
 
+  menuClose.addEventListener("click", closeMenu);
+
   menu.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", () => {
-      menu.classList.remove("open");
-      menuButton.setAttribute("aria-expanded", "false");
+      closeMenu();
     });
+  });
+
+  menu.addEventListener("click", (event) => {
+    if (!menuPanel.contains(event.target)) {
+      closeMenu();
+    }
   });
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
-      menu.classList.remove("open");
-      menuButton.setAttribute("aria-expanded", "false");
+      closeMenu();
     }
   });
 
