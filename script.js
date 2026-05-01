@@ -666,7 +666,11 @@ function initHeader() {
     menuButton.setAttribute("aria-expanded", String(isOpen));
   });
 
-  menuClose.addEventListener("click", closeMenu);
+  menuClose.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    closeMenu();
+  });
 
   menu.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", () => {
@@ -674,8 +678,17 @@ function initHeader() {
     });
   });
 
-  menu.addEventListener("click", (event) => {
-    if (!menuPanel.contains(event.target)) {
+  menuPanel.addEventListener("click", (event) => {
+    event.stopPropagation();
+  });
+
+  document.addEventListener("pointerdown", (event) => {
+    if (!menu.classList.contains("open")) {
+      return;
+    }
+
+    const target = event.target;
+    if (!menuPanel.contains(target) && !menuButton.contains(target)) {
       closeMenu();
     }
   });
