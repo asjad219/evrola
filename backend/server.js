@@ -42,16 +42,33 @@ let authClient;
 
 async function initializeGoogleSheets() {
   try {
-    const serviceAccountPath = process.env.GOOGLE_SERVICE_ACCOUNT_PATH;
-    
-    if (!serviceAccountPath) {
-      throw new Error('GOOGLE_SERVICE_ACCOUNT_PATH not set in .env');
-    }
+    let serviceAccount;
 
-    // Read and parse service account JSON
-    const serviceAccount = JSON.parse(
-      fs.readFileSync(serviceAccountPath, 'utf8')
-    );
+    // Try embedded JSON first (for Vercel)
+    if (config.googleServiceAccountJson) {
+      try {
+        serviceAccount = JSON.parse(config.googleServiceAccountJson);
+        console.log('✅ Using embedded Google Service Account JSON');
+      } catch (parseError) {
+        console.error('❌ Failed to parse GOOGLE_SERVICE_ACCOUNT:', parseError.message);
+        throw new Error('Invalid GOOGLE_SERVICE_ACCOUNT JSON format');
+      }
+    } 
+    // Fall back to file path (for local development)
+    else if (config.googleServiceAccountPath) {
+      try {
+        serviceAccount = JSON.parse(
+          fs.readFileSync(config.googleServiceAccountPath, 'utf8')
+        );
+        console.log('✅ Using Google Service Account from file');
+      } catch (fileError) {
+        console.error('❌ Failed to read service account file:', fileError.message);
+        throw new Error('Could not read GOOGLE_SERVICE_ACCOUNT_PATH file');
+      }
+    } 
+    else {
+      throw new Error('No Google Service Account configuration found');
+    }
 
     // Create auth client
     authClient = new google.auth.GoogleAuth({
@@ -65,10 +82,12 @@ async function initializeGoogleSheets() {
       auth: authClient,
     });
 
-    console.log('✅ Google Sheets API initialized with Service Account');
+    console.log('✅ Google Sheets API initialized successfully');
   } catch (error) {
     console.error('❌ Failed to initialize Google Sheets:', error.message);
-    console.error('Make sure GOOGLE_SERVICE_ACCOUNT_PATH is set and file exists');
+    console.error('\nTroubleshooting:');
+    console.error('- For local dev: Ensure GOOGLE_SERVICE_ACCOUNT_PATH points to valid service-account.json');
+    console.error('- For Vercel: Ensure GOOGLE_SERVICE_ACCOUNT env var contains full JSON as string');
     process.exit(1);
   }
 }

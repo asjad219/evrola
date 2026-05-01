@@ -567,7 +567,7 @@ function initComparisonSlider() {
 function initForms() {
   const auditForm = document.getElementById("audit-form");
   const quoteForm = document.getElementById("quote-form");
-  const BACKEND_URL = "http://localhost:3001";
+  const BACKEND_URL = "https://backend-seven-kappa-90.vercel.app";
 
   auditForm?.addEventListener("submit", async (event) => {
     event.preventDefault();
