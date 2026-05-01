@@ -567,29 +567,100 @@ function initComparisonSlider() {
 function initForms() {
   const auditForm = document.getElementById("audit-form");
   const quoteForm = document.getElementById("quote-form");
+  const BACKEND_URL = "http://localhost:3001";
 
-  auditForm?.addEventListener("submit", (event) => {
+  auditForm?.addEventListener("submit", async (event) => {
     event.preventDefault();
     if (!auditForm.reportValidity()) {
       return;
     }
 
-    const payload = Object.fromEntries(new FormData(auditForm).entries());
-    storage.set("evrola-audit-lead", JSON.stringify(payload));
-    document.getElementById("audit-message")?.classList.add("visible");
-    auditForm.reset();
+    const submitButton = auditForm.querySelector("button[type='submit']");
+    const messageElement = document.getElementById("audit-message");
+    const originalButtonText = submitButton.textContent;
+
+    try {
+      submitButton.disabled = true;
+      submitButton.textContent = "Submitting...";
+
+      const payload = Object.fromEntries(new FormData(auditForm).entries());
+      
+      const response = await fetch(`${BACKEND_URL}/api/submit-audit`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to submit form");
+      }
+
+      messageElement.textContent = "✅ Audit request received! Check your email for confirmation.";
+      messageElement.style.color = "#99f0c8";
+      messageElement.classList.add("visible");
+      auditForm.reset();
+      submitButton.textContent = "Request My Free Audit";
+      
+      setTimeout(() => {
+        messageElement.classList.remove("visible");
+      }, 5000);
+    } catch (error) {
+      console.error("Audit form error:", error);
+      messageElement.textContent = `❌ Error: ${error.message}. Backend might not be running on port 3001.`;
+      messageElement.style.color = "#ff6b6b";
+      messageElement.classList.add("visible");
+      submitButton.textContent = originalButtonText;
+    } finally {
+      submitButton.disabled = false;
+    }
   });
 
-  quoteForm?.addEventListener("submit", (event) => {
+  quoteForm?.addEventListener("submit", async (event) => {
     event.preventDefault();
     if (!quoteForm.reportValidity()) {
       return;
     }
 
-    const payload = Object.fromEntries(new FormData(quoteForm).entries());
-    storage.set("evrola-quote-lead", JSON.stringify(payload));
-    document.getElementById("quote-message")?.classList.add("visible");
-    quoteForm.reset();
+    const submitButton = quoteForm.querySelector("button[type='submit']");
+    const messageElement = document.getElementById("quote-message");
+    const originalButtonText = submitButton.textContent;
+
+    try {
+      submitButton.disabled = true;
+      submitButton.textContent = "Submitting...";
+
+      const payload = Object.fromEntries(new FormData(quoteForm).entries());
+      
+      const response = await fetch(`${BACKEND_URL}/api/submit-quote`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to submit form");
+      }
+
+      messageElement.textContent = "✅ Quote request received! We'll call you soon.";
+      messageElement.style.color = "#99f0c8";
+      messageElement.classList.add("visible");
+      quoteForm.reset();
+      submitButton.textContent = "Get My Free Quote";
+      
+      setTimeout(() => {
+        messageElement.classList.remove("visible");
+      }, 5000);
+    } catch (error) {
+      console.error("Quote form error:", error);
+      messageElement.textContent = `❌ Error: ${error.message}. Backend might not be running on port 3001.`;
+      messageElement.style.color = "#ff6b6b";
+      messageElement.classList.add("visible");
+      submitButton.textContent = originalButtonText;
+    } finally {
+      submitButton.disabled = false;
+    }
   });
 }
 
