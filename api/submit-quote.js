@@ -1,7 +1,18 @@
-import { handleCors, initializeGoogleSheets, appendToSheet, sendEmail } from './_utils.js';
+import { google } from 'googleapis';
+import nodemailer from 'nodemailer';
+
+function setCorsHeaders(res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+}
 
 export default async function handler(req, res) {
-  if (handleCors(req, res)) return;
+  setCorsHeaders(res);
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
 
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -12,19 +23,58 @@ export default async function handler(req, res) {
 
     // Validation
     if (!name || !phone || !service || !time) {
-      return res.status(400).json({ error: 'Missing required fields' });
+      return res.status(400).json({ error: 'Missing required fields: name, phone, service, time' });
+    }
+
+    // Verify env vars
+    if (!process.env.GOOGLE_SERVICE_ACCOUNT || !process.env.GOOGLE_SHEET_ID || !process.env.GMAIL_USER || !process.env.GMAIL_PASSWORD) {
+      console.error('Missing environment variables');
+      return res.status(500).json({ error: 'Server configuration error' });
+    }
+
+    // Parse service account
+    let serviceAccount;
+    try {
+      serviceAccount = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT);
+    } catch (e) {
+      console.error('Failed to parse GOOGLE_SERVICE_ACCOUNT:', e.message);
+      return res.status(500).json({ error: 'Service account configuration error' });
     }
 
     // Initialize Google Sheets
-    await initializeGoogleSheets();
+    const authClient = new google.auth.GoogleAuth({
+      credentials: serviceAccount,
+      scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+    });
+
+    const sheets = google.sheets({
+      version: 'v4',
+      auth: authClient,
+    });
 
     const timestamp = new Date().toISOString();
     const sheetValues = [timestamp, name, phone, service, time];
 
     // Append to Google Sheets
-    await appendToSheet('Quote Requests!A1', sheetValues);
+    await sheets.spreadsheets.values.append({
+      spreadsheetId: process.env.GOOGLE_SHEET_ID,
+      range: 'Quote Requests!A1',
+      valueInputOption: 'USER_ENTERED',
+      resource: {
+        values: [sheetValues],
+      },
+    });
 
-    // Send confirmation email to user (if email provided, optional in quote form)
+    // Setup email transporter
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_PASSWORD,
+      },
+    });
+
+    // Send user confirmation email
     const userEmailHtml = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <h2 style="color: #0066ff;">Quote Request Received ✅</h2>
@@ -40,12 +90,18 @@ export default async function handler(req, res) {
         </div>
         
         <p>Expect a call within the next 24 hours!</p>
-        
         <p>Best regards,<br><strong>Evrola Team</strong></p>
       </div>
     `;
 
-    // Send notification email to admin
+    await transporter.sendMail({
+      from: process.env.GMAIL_USER,
+      to: name.includes('@') ? name : process.env.NOTIFICATION_EMAIL,
+      subject: 'Quote Request Received',
+      html: userEmailHtml,
+    });
+
+    // Send admin notification email
     const adminEmailHtml = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <h2 style="color: #ff6b35;">🔥 New Quote Request</h2>
@@ -54,21 +110,22 @@ export default async function handler(req, res) {
         <p><strong>Service:</strong> ${service}</p>
         <p><strong>Best Time to Call:</strong> ${time}</p>
         <p><strong>Submitted:</strong> ${timestamp}</p>
-        
-        <p style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd;">
-          <a href="https://docs.google.com/spreadsheets/d/${process.env.GOOGLE_SHEET_ID}" style="background: #ff6b35; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">View in Google Sheets</a>
-        </p>
       </div>
     `;
 
-    await sendEmail('New Quote Request from ' + name, adminEmailHtml, process.env.NOTIFICATION_EMAIL);
+    await transporter.sendMail({
+      from: process.env.GMAIL_USER,
+      to: process.env.NOTIFICATION_EMAIL,
+      subject: 'New Quote Request from ' + name,
+      html: adminEmailHtml,
+    });
 
-    res.json({
+    return res.json({
       success: true,
       message: 'Quote request submitted successfully',
     });
   } catch (error) {
-    console.error('Error in /api/submit-quote:', error);
-    res.status(500).json({ error: error.message });
+    console.error('Error in /api/submit-quote:', error.message);
+    return res.status(500).json({ error: error.message || 'Server error' });
   }
 }
