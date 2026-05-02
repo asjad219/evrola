@@ -567,7 +567,9 @@ function initComparisonSlider() {
 function initForms() {
   const auditForm = document.getElementById("audit-form");
   const quoteForm = document.getElementById("quote-form");
-  const BACKEND_URL = "https://backend-seven-kappa-90.vercel.app";
+  const BACKEND_URL = window.location.hostname === "localhost"
+    ? "http://localhost:3001"
+    : "https://backend-seven-kappa-90.vercel.app";
 
   auditForm?.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -607,7 +609,7 @@ function initForms() {
       }, 5000);
     } catch (error) {
       console.error("Audit form error:", error);
-      messageElement.textContent = `❌ Error: ${error.message}. Backend might not be running on port 3001.`;
+      messageElement.textContent = `❌ Error: ${error.message}. Please try again.`;
       messageElement.style.color = "#ff6b6b";
       messageElement.classList.add("visible");
       submitButton.textContent = originalButtonText;
@@ -654,7 +656,7 @@ function initForms() {
       }, 5000);
     } catch (error) {
       console.error("Quote form error:", error);
-      messageElement.textContent = `❌ Error: ${error.message}. Backend might not be running on port 3001.`;
+      messageElement.textContent = `❌ Error: ${error.message}. Please try again.`;
       messageElement.style.color = "#ff6b6b";
       messageElement.classList.add("visible");
       submitButton.textContent = originalButtonText;
