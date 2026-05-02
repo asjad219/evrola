@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
-// Backend URL configuration
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || '';
+// ALWAYS use relative URLs - NO environment variables, NO hardcoded domains
+const BACKEND_URL = '';
 
 const navLinks = [
   { label: "Portfolio", href: "#portfolio" },
