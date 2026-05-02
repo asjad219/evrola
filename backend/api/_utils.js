@@ -3,7 +3,7 @@ function getAllowedOrigin(requestOrigin) {
     'http://localhost:5173',
     'https://evrola.vercel.app',
   ];
-  const raw = process.env.FRONTEND_URLS || process.env.FRONTEND_URL || '';
+  const raw = process.env.FRONTEND_URLS || '';
   const allowedOrigins = raw
     .split(',')
     .map((value) => value.trim())

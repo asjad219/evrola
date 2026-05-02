@@ -17,7 +17,7 @@ const defaultAllowedOrigins = [
 ];
 
 function parseAllowedOrigins() {
-  const raw = process.env.FRONTEND_URLS || process.env.FRONTEND_URL || '';
+  const raw = process.env.FRONTEND_URLS || '';
   const fromEnv = raw
     .split(',')
     .map((value) => value.trim())
