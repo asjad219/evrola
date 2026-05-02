@@ -8,3 +8,4 @@ node_modules/
 dist/node_modules/
 .chrome-headless/
 .edge-headless/
+backend/service-account.json

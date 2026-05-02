@@ -368,28 +368,64 @@ function App() {
     }
   }, [filteredFaqs, openFaq]);
 
-  const onAuditSubmit = (event) => {
+  const onAuditSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
     if (!form.reportValidity()) {
       return;
     }
     const payload = Object.fromEntries(new FormData(form).entries());
-    window.localStorage.setItem("infusyn-audit-lead", JSON.stringify(payload));
-    setAuditSubmitted(true);
-    form.reset();
+    
+    try {
+      const response = await fetch('http://localhost:3001/api/submit-audit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        window.localStorage.setItem("infusyn-audit-lead", JSON.stringify(payload));
+        setAuditSubmitted(true);
+        form.reset();
+      } else {
+        const error = await response.json();
+        alert('Error submitting form: ' + (error.error || 'Unknown error'));
+      }
+    } catch (error) {
+      window.localStorage.setItem("infusyn-audit-lead", JSON.stringify(payload));
+      setAuditSubmitted(true);
+      form.reset();
+    }
   };
 
-  const onQuoteSubmit = (event) => {
+  const onQuoteSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
     if (!form.reportValidity()) {
       return;
     }
     const payload = Object.fromEntries(new FormData(form).entries());
-    window.localStorage.setItem("infusyn-quote-lead", JSON.stringify(payload));
-    setQuoteSubmitted(true);
-    form.reset();
+    
+    try {
+      const response = await fetch('http://localhost:3001/api/submit-quote', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        window.localStorage.setItem("infusyn-quote-lead", JSON.stringify(payload));
+        setQuoteSubmitted(true);
+        form.reset();
+      } else {
+        const error = await response.json();
+        alert('Error submitting form: ' + (error.error || 'Unknown error'));
+      }
+    } catch (error) {
+      window.localStorage.setItem("infusyn-quote-lead", JSON.stringify(payload));
+      setQuoteSubmitted(true);
+      form.reset();
+    }
   };
 
   return (
