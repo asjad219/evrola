@@ -569,7 +569,7 @@ function initForms() {
   const quoteForm = document.getElementById("quote-form");
   const BACKEND_URL = window.location.hostname === "localhost"
     ? "http://localhost:3001"
-    : "https://backend-seven-kappa-90.vercel.app";
+    : "";
 
   auditForm?.addEventListener("submit", async (event) => {
     event.preventDefault();
