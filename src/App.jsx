@@ -1,5 +1,18 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
+// Determine backend URL based on environment
+const getBackendUrl = () => {
+  if (import.meta.env.DEV) {
+    // Local development
+    return import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001';
+  } else {
+    // Production - use environment variable or default to production backend
+    return import.meta.env.VITE_BACKEND_URL || 'https://your-backend-domain.com';
+  }
+};
+
+const BACKEND_URL = getBackendUrl();
+
 const navLinks = [
   { label: "Portfolio", href: "#portfolio" },
   { label: "Services", href: "#services" },
@@ -377,7 +390,7 @@ function App() {
     const payload = Object.fromEntries(new FormData(form).entries());
     
     try {
-      const response = await fetch('http://localhost:3001/api/submit-audit', {
+      const response = await fetch(`${BACKEND_URL}/api/submit-audit`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -407,7 +420,7 @@ function App() {
     const payload = Object.fromEntries(new FormData(form).entries());
     
     try {
-      const response = await fetch('http://localhost:3001/api/submit-quote', {
+      const response = await fetch(`${BACKEND_URL}/api/submit-quote`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
