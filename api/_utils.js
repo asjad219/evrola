@@ -103,19 +103,44 @@ export async function sendEmail(subject, htmlContent, recipientEmail) {
 }
 
 // Enable CORS
-export function setCorsHeaders(res) {
-  res.setHeader('Access-Control-Allow-Origin', process.env.FRONTEND_URL || '*');
+function getAllowedOrigin(requestOrigin) {
+  const defaultAllowedOrigins = [
+    'http://localhost:5173',
+    'https://evrola.vercel.app',
+  ];
+  const raw = process.env.FRONTEND_URLS || process.env.FRONTEND_URL || '';
+  const allowedOrigins = raw
+    .split(',')
+    .map((value) => value.trim())
+    .filter(Boolean);
+
+  const finalAllowedOrigins = allowedOrigins.length > 0 ? allowedOrigins : defaultAllowedOrigins;
+
+  if (!requestOrigin) {
+    return '*';
+  }
+
+  if (finalAllowedOrigins.includes(requestOrigin)) {
+    return requestOrigin;
+  }
+
+  return 'null';
+}
+
+export function setCorsHeaders(res, requestOrigin) {
+  res.setHeader('Access-Control-Allow-Origin', getAllowedOrigin(requestOrigin));
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Max-Age', '86400');
 }
 
 // Handle OPTIONS requests for CORS
 export function handleCors(req, res) {
   if (req.method === 'OPTIONS') {
-    setCorsHeaders(res);
+    setCorsHeaders(res, req.headers.origin);
     res.status(200).end();
     return true;
   }
-  setCorsHeaders(res);
+  setCorsHeaders(res, req.headers.origin);
   return false;
 }

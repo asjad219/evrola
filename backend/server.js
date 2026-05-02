@@ -11,11 +11,42 @@ const PORT = config.port;
 const SHEET_ID = config.googleSheetId;
 const NOTIFICATION_EMAIL = config.notificationEmail;
 
-// Middleware
-app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+const defaultAllowedOrigins = [
+  'http://localhost:5173',
+  'https://evrola.vercel.app',
+];
+
+function parseAllowedOrigins() {
+  const raw = process.env.FRONTEND_URLS || process.env.FRONTEND_URL || '';
+  const fromEnv = raw
+    .split(',')
+    .map((value) => value.trim())
+    .filter(Boolean);
+
+  return fromEnv.length > 0 ? fromEnv : defaultAllowedOrigins;
+}
+
+const allowedOrigins = parseAllowedOrigins();
+const corsOptions = {
+  origin(origin, callback) {
+    // Allow non-browser requests with no Origin header
+    if (!origin) {
+      return callback(null, true);
+    }
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    return callback(new Error(`CORS blocked for origin: ${origin}`));
+  },
   credentials: true,
-}));
+  optionsSuccessStatus: 200,
+};
+
+// Middleware
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 app.use(express.json());
 
 // Configure Gmail transporter
