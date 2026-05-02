@@ -6,8 +6,8 @@ const getBackendUrl = () => {
     // Local development
     return import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001';
   } else {
-    // Production - use environment variable or default to production backend
-    return import.meta.env.VITE_BACKEND_URL || 'https://your-backend-domain.com';
+    // Production - use relative URLs (same domain as frontend)
+    return '';
   }
 };
 
