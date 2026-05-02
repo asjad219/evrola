@@ -5,20 +5,9 @@
     "api/**/*.js": {
       "runtime": "nodejs18.x",
       "memory": 1024,
-      "maxDuration": 60,
-      "environment": {
-        "NODE_ENV": "production"
-      }
+      "maxDuration": 60
     }
   },
-  "env": [
-    "GMAIL_USER",
-    "GMAIL_PASSWORD",
-    "GOOGLE_SHEET_ID",
-    "GOOGLE_SERVICE_ACCOUNT",
-    "NOTIFICATION_EMAIL",
-    "FRONTEND_URL"
-  ],
   "rewrites": [
     {
       "source": "/api/:path*",
