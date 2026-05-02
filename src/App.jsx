@@ -1,17 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
-// Determine backend URL based on environment
-const getBackendUrl = () => {
-  if (import.meta.env.DEV) {
-    // Local development
-    return import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001';
-  } else {
-    // Production - use relative URLs (same domain as frontend)
-    return '';
-  }
-};
-
-const BACKEND_URL = getBackendUrl();
+// Backend URL configuration
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || '';
 
 const navLinks = [
   { label: "Portfolio", href: "#portfolio" },
