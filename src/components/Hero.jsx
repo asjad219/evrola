@@ -65,7 +65,7 @@ const Hero = ({ onOpenQuote }) => {
             <div className="trust-divider"></div>
             <div className="trust-item">
               <span className="square-bullet">■</span>
-              <span className="trust-text">Money-Back Guarantee</span>
+              <span className="trust-text">14-Day Launch Guarantee</span>
             </div>
           </div>
         </motion.div>
