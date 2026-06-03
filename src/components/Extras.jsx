@@ -62,6 +62,7 @@ export const FloatingQuoteForm = ({ isOpen, setIsOpen }) => {
     name: '',
     phone: '',
     email: '',
+    website: '',
     service: 'Website + AI Receptionist',
     time: ''
   });
@@ -74,26 +75,27 @@ export const FloatingQuoteForm = ({ isOpen, setIsOpen }) => {
     setSubmitError('');
 
     try {
-      // Google Apps Script requires no-cors mode for cross-origin POST
-      await fetch(APPS_SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors', // Apps Script Web App doesn't send CORS headers by default
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name:    formData.name,
-          phone:   formData.phone,
-          email:   formData.email,
-          service: formData.service,
-          time:    formData.time
-        })
+      // Use GET with URL params — the only reliable no-CORS method for Apps Script
+      const params = new URLSearchParams({
+        name:    formData.name,
+        phone:   formData.phone,
+        email:   formData.email,
+        website: formData.website,
+        service: formData.service,
+        time:    formData.time
       });
 
-      // With no-cors we can't read the response, but if no network error → treat as success
+      await fetch(`${APPS_SCRIPT_URL}?${params.toString()}`, {
+        method: 'GET',
+        mode: 'no-cors'
+      });
+
+      // With no-cors we can't read the response body, but no thrown error = success
       setIsSubmitted(true);
       setTimeout(() => {
         setIsOpen(false);
         setIsSubmitted(false);
-        setFormData({ name: '', phone: '', email: '', service: 'Website + AI Receptionist', time: '' });
+        setFormData({ name: '', phone: '', email: '', website: '', service: 'Website + AI Receptionist', time: '' });
       }, 5000);
 
     } catch (err) {
@@ -172,6 +174,17 @@ export const FloatingQuoteForm = ({ isOpen, setIsOpen }) => {
                     placeholder="e.g. john@example.com"
                     value={formData.email}
                     onChange={e => setFormData({...formData, email: e.target.value})}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="quote-website">Current Website URL</label>
+                  <input 
+                    type="url" 
+                    id="quote-website"
+                    placeholder="e.g. https://yourwebsite.com"
+                    value={formData.website}
+                    onChange={e => setFormData({...formData, website: e.target.value})}
                   />
                 </div>
 
