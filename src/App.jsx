@@ -9,7 +9,7 @@ import Testimonials from './components/Testimonials.jsx';
 import Pricing from './components/Pricing.jsx';
 import FAQ from './components/FAQ.jsx';
 import Footer from './components/Footer.jsx';
-import { EmergencyRibbon, MobileStickyBar } from './components/Extras.jsx';
+import { EmergencyRibbon, MobileStickyBar, FloatingQuoteForm } from './components/Extras.jsx';
 import './App.css';
 
 function App() {
@@ -29,6 +29,7 @@ function App() {
       </main>
       <Footer />
       <MobileStickyBar />
+      <FloatingQuoteForm />
     </div>
   );
 }
