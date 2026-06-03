@@ -54,20 +54,21 @@ export const FloatingQuoteForm = () => {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
+    email: '',
     service: 'Website + AI Receptionist',
     time: ''
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.name || !formData.phone) return;
+    if (!formData.name || !formData.phone || !formData.email) return;
     setIsSubmitted(true);
     setTimeout(() => {
       // Keep it open for 5 seconds to show success then auto close
       setTimeout(() => {
         setIsOpen(false);
         setIsSubmitted(false);
-        setFormData({ name: '', phone: '', service: 'Website + AI Receptionist', time: '' });
+        setFormData({ name: '', phone: '', email: '', service: 'Website + AI Receptionist', time: '' });
       }, 5000);
     }, 500);
   };
@@ -132,6 +133,18 @@ export const FloatingQuoteForm = () => {
                 </div>
 
                 <div className="form-group">
+                  <label htmlFor="quote-email">Email Address *</label>
+                  <input 
+                    type="email" 
+                    id="quote-email"
+                    required
+                    placeholder="e.g. john@example.com"
+                    value={formData.email}
+                    onChange={e => setFormData({...formData, email: e.target.value})}
+                  />
+                </div>
+
+                <div className="form-group">
                   <label htmlFor="quote-service">Select Niche Service</label>
                   <select 
                     id="quote-service"
@@ -170,8 +183,11 @@ export const FloatingQuoteForm = () => {
                 <CheckCircle size={48} className="success-icon" />
                 <h4>Request Received!</h4>
                 <p>Thank you, <strong>{formData.name}</strong>. We are compiling your report.</p>
-                <div className="success-sms-alert">
+                <div className="success-sms-alert" style={{ marginBottom: '10px' }}>
                   <span>📱 SMS Confirmation sent to <strong>{formData.phone}</strong></span>
+                </div>
+                <div className="success-sms-alert">
+                  <span>✉️ Audit Report will be sent to <strong>{formData.email}</strong></span>
                 </div>
               </motion.div>
             )}
