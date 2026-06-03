@@ -48,8 +48,16 @@ export const MobileStickyBar = () => {
   );
 };
 
+// ─── REPLACE THIS URL after deploying your Google Apps Script ───────────────
+// Go to script.google.com → paste the code → Deploy → New Deployment → Web App
+// Set "Execute as: Me" and "Who has access: Anyone", then copy the URL below.
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyVT8k8xttZanuJl4KFumL2z0NkDD4c6ey8w9LMI_n9g8CQIRmnI6g2bjq5kLsmdYsQ/exec";
+// ────────────────────────────────────────────────────────────────────────────
+
 export const FloatingQuoteForm = ({ isOpen, setIsOpen }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading]   = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -58,18 +66,42 @@ export const FloatingQuoteForm = ({ isOpen, setIsOpen }) => {
     time: ''
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name || !formData.phone || !formData.email) return;
-    setIsSubmitted(true);
-    setTimeout(() => {
-      // Keep it open for 5 seconds to show success then auto close
+
+    setIsLoading(true);
+    setSubmitError('');
+
+    try {
+      // Google Apps Script requires no-cors mode for cross-origin POST
+      await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors', // Apps Script Web App doesn't send CORS headers by default
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name:    formData.name,
+          phone:   formData.phone,
+          email:   formData.email,
+          service: formData.service,
+          time:    formData.time
+        })
+      });
+
+      // With no-cors we can't read the response, but if no network error → treat as success
+      setIsSubmitted(true);
       setTimeout(() => {
         setIsOpen(false);
         setIsSubmitted(false);
         setFormData({ name: '', phone: '', email: '', service: 'Website + AI Receptionist', time: '' });
       }, 5000);
-    }, 500);
+
+    } catch (err) {
+      console.error('Form submission error:', err);
+      setSubmitError('Something went wrong. Please try again or call us directly.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -105,7 +137,7 @@ export const FloatingQuoteForm = ({ isOpen, setIsOpen }) => {
 
             {!isSubmitted ? (
               <form onSubmit={handleSubmit} className="panel-form">
-                <p className="panel-subtitle">Get a custom performance, speed, & lead audit delivered in 24 hours.</p>
+                <p className="panel-subtitle">Get a custom performance, speed, &amp; lead audit delivered in 24 hours.</p>
                 
                 <div className="form-group">
                   <label htmlFor="quote-name">Your Name *</label>
@@ -151,7 +183,7 @@ export const FloatingQuoteForm = ({ isOpen, setIsOpen }) => {
                     onChange={e => setFormData({...formData, service: e.target.value})}
                   >
                     <option value="Website + AI Receptionist">Website + AI Receptionist</option>
-                    <option value="Local SEO / Google Maps">Local SEO & Google Maps</option>
+                    <option value="Local SEO / Google Maps">Local SEO &amp; Google Maps</option>
                     <option value="PageSpeed Optimization">PageSpeed Optimization</option>
                     <option value="Custom Web Redesign">Custom Web Redesign</option>
                   </select>
@@ -168,9 +200,23 @@ export const FloatingQuoteForm = ({ isOpen, setIsOpen }) => {
                   />
                 </div>
 
-                <button type="submit" className="btn-clay-blue panel-submit-btn w-full">
-                  <span>Get My Free Audit</span>
-                  <Send size={14} />
+                {submitError && (
+                  <p className="form-error-msg">{submitError}</p>
+                )}
+
+                <button 
+                  type="submit" 
+                  className="btn-clay-blue panel-submit-btn w-full"
+                  disabled={isLoading}
+                >
+                  {isLoading ? (
+                    <span>Sending...</span>
+                  ) : (
+                    <>
+                      <span>Get My Free Audit</span>
+                      <Send size={14} />
+                    </>
+                  )}
                 </button>
               </form>
             ) : (
