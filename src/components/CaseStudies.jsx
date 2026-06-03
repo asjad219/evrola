@@ -12,7 +12,7 @@ const BeforeAfterSlider = ({ beforeTitle, afterTitle, beforeBg, afterBg, beforeS
         {/* After / New Site (Bottom Layer) */}
         <div className="slider-pane after-pane" style={{ backgroundColor: afterBg }}>
           <div className="pane-content after-content">
-            <span className="pane-watermark">AFTER (INFUSYN)</span>
+            <span className="pane-watermark">AFTER (EVROLA)</span>
             <div className="pane-nav">
               <span className="dot"></span>
               <span className="nav-line"></span>

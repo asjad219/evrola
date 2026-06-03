@@ -48,8 +48,7 @@ export const MobileStickyBar = () => {
   );
 };
 
-export const FloatingQuoteForm = () => {
-  const [isOpen, setIsOpen] = useState(false);
+export const FloatingQuoteForm = ({ isOpen, setIsOpen }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: '',

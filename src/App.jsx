@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from './components/Navbar.jsx';
 import Hero from './components/Hero.jsx';
 import Marquee from './components/Marquee.jsx';
@@ -13,12 +13,18 @@ import { EmergencyRibbon, MobileStickyBar, FloatingQuoteForm } from './component
 import './App.css';
 
 function App() {
+  const [isQuoteOpen, setIsQuoteOpen] = useState(false);
+
+  const openQuotePopup = () => {
+    setIsQuoteOpen(true);
+  };
+
   return (
     <div className="app-container">
       <EmergencyRibbon />
-      <Navbar />
+      <Navbar onOpenQuote={openQuotePopup} />
       <main>
-        <Hero />
+        <Hero onOpenQuote={openQuotePopup} />
         <Marquee />
         <BentoServices />
         <CaseStudies />
@@ -27,9 +33,9 @@ function App() {
         <Pricing />
         <FAQ />
       </main>
-      <Footer />
+      <Footer onOpenQuote={openQuotePopup} />
       <MobileStickyBar />
-      <FloatingQuoteForm />
+      <FloatingQuoteForm isOpen={isQuoteOpen} setIsOpen={setIsQuoteOpen} />
     </div>
   );
 }

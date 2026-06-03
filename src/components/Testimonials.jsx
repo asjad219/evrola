@@ -5,7 +5,7 @@ import './Testimonials.css';
 const row1Testimonials = [
   {
     stars: 5,
-    quote: "InfuSyn rebuilt our site in 10 days and added the AI receptionist. We got 3 emergency calls on the first weekend that would have gone to voicemail!",
+    quote: "Evrola rebuilt our site in 10 days and added the AI receptionist. We got 3 emergency calls on the first weekend that would have gone to voicemail!",
     name: "Dave Richardson",
     role: "Owner, Apex Heating",
     city: "Houston, TX",
@@ -29,7 +29,7 @@ const row1Testimonials = [
   },
   {
     stars: 5,
-    quote: "We've tried 3 different web design agencies. InfuSyn is the only one that understands the HVAC niche. Highly recommend!",
+    quote: "We've tried 3 different web design agencies. Evrola is the only one that understands the HVAC niche. Highly recommend!",
     name: "Brandon King",
     role: "President, Sunbelt AC",
     city: "Miami, FL",
@@ -56,7 +56,7 @@ const row2Testimonials = [
   },
   {
     stars: 5,
-    quote: "We spend $2k a month on Google Ads, and our old site was wasting clicks. InfuSyn doubled our conversion rate.",
+    quote: "We spend $2k a month on Google Ads, and our old site was wasting clicks. Evrola doubled our conversion rate.",
     name: "Ryan Hughes",
     role: "Owner, Heartland Heating",
     city: "Omaha, NE",

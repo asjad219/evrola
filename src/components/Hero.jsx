@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Star, ArrowDown, ChevronRight, MessageSquare, Check, Phone } from 'lucide-react';
 import './Hero.css';
 
-const Hero = () => {
+const Hero = ({ onOpenQuote }) => {
   return (
     <section className="hero">
       {/* Background Radial Glow */}
@@ -40,9 +40,9 @@ const Hero = () => {
             <a href="#work" className="btn-clay-blue btn-lg">
               See Our Work <ArrowDown size={16} />
             </a>
-            <a href="#pricing" className="btn-outline-orange btn-lg">
+            <button onClick={onOpenQuote} className="btn-outline-orange btn-lg">
               Get Free Audit <ChevronRight size={16} />
-            </a>
+            </button>
           </div>
 
           {/* Trust Row */}
@@ -65,7 +65,7 @@ const Hero = () => {
             <div className="trust-divider"></div>
             <div className="trust-item">
               <span className="square-bullet">■</span>
-              <span className="trust-text">HVAC Niche Only</span>
+              <span className="trust-text">Money-Back Guarantee</span>
             </div>
           </div>
         </motion.div>

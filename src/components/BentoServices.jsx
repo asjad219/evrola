@@ -145,7 +145,7 @@ const BentoServices = () => {
                 <Counter endVal="2.3" suffix="x" />
               </div>
               <h4>More Calls in 60 Days</h4>
-              <p className="stat-desc">Average increase in customer phone inquiries after replacing template clone sites with InfuSyn portfolio platforms.</p>
+              <p className="stat-desc">Average increase in customer phone inquiries after replacing template clone sites with Evrola portfolio platforms.</p>
               
               <div className="stat-growth-bar">
                 <div className="growth-fill"></div>
