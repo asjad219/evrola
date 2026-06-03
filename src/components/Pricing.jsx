@@ -41,7 +41,7 @@ const pricingTiers = [
       { name: "Scroll-Triggered Animations", included: true },
       { name: "Local SEO Schema Setup", included: true },
       { name: "Interactive Before/After Slider", included: true },
-      { name: "AI Chat Booking (n8n)", included: false },
+      { name: "AI Chat Booking (n8n)", included: true },
       { name: "Monthly SEO Reporting", included: false },
       { name: "Google Business Mgmt Support", included: false },
       { name: "Support: 48hr Response Time", included: true },
