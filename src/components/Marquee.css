@@ -1,0 +1,105 @@
+.marquee-section {
+  padding: 40px 0;
+  background-color: var(--color-dominant);
+  overflow: hidden;
+  position: relative;
+  z-index: 10;
+}
+
+.marquee-label {
+  font-family: 'Satoshi', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.marquee-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  position: relative;
+  /* Mask gradient for edge fading */
+  mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  width: 100%;
+}
+
+.marquee-content {
+  display: flex;
+  gap: 16px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* Row 1 - Left scrolling keyframe */
+@keyframes scrollLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-33.33%); }
+}
+
+/* Row 2 - Right scrolling keyframe */
+@keyframes scrollRight {
+  0% { transform: translateX(-33.33%); }
+  100% { transform: translateX(0); }
+}
+
+.scroll-left .marquee-content {
+  animation: scrollLeft 35s linear infinite;
+}
+
+.scroll-right .marquee-content {
+  animation: scrollRight 45s linear infinite;
+}
+
+/* Pause on hover as standard best practice */
+.marquee-track:hover .marquee-content {
+  animation-play-state: paused;
+}
+
+/* Badge styling */
+.marquee-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background-color: var(--color-secondary);
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  padding: 10px 20px;
+  font-family: 'Satoshi', sans-serif;
+  font-size: 14px;
+  color: var(--text-primary);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.company-name {
+  font-weight: 700;
+}
+
+.badge-separator {
+  color: var(--color-accent);
+  font-weight: 300;
+  opacity: 0.5;
+}
+
+.company-city {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.map-pin-icon {
+  color: var(--color-accent);
+}

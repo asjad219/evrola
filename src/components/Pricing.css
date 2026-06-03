@@ -1,0 +1,298 @@
+.pricing-section {
+  background-color: var(--color-dominant);
+  position: relative;
+  z-index: 10;
+}
+
+/* Toggle Switcher Styling */
+.pricing-toggle-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.pricing-toggle-pill {
+  display: flex;
+  padding: 6px;
+  border-radius: 100px;
+  background: rgba(10, 37, 64, 0.4);
+  border: 1px solid var(--border-glass);
+}
+
+.toggle-option {
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: 'Satoshi', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 10px 20px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toggle-option.active {
+  background-color: var(--color-accent);
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(0, 102, 255, 0.3);
+}
+
+.save-badge-chip {
+  background: var(--color-warning);
+  color: #FFFFFF;
+  font-family: 'Satoshi', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 6px 12px;
+  border-radius: 100px;
+  box-shadow: 0 4px 10px rgba(255, 107, 53, 0.3);
+}
+
+/* Pricing Grid - 3 Columns */
+.pricing-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-top: 60px;
+  align-items: stretch;
+}
+
+.pricing-card-v2 {
+  background: var(--color-card-dark); /* Card BG: #111827 */
+  border: 1px solid var(--border-glass);
+  border-radius: 20px;
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pricing-card-v2:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-glass);
+  box-shadow: var(--shadow-premium);
+}
+
+/* Recommended/Professional Tier Highlight Styling */
+.recommended-highlight {
+  border: 2px solid var(--color-accent); /* Electric blue border 2px */
+  transform: scale(1.04); /* scale(1.04) */
+  background: linear-gradient(180deg, var(--color-card-dark) 0%, rgba(0, 102, 255, 0.04) 100%);
+  box-shadow: var(--shadow-glow);
+}
+
+.recommended-highlight:hover {
+  transform: scale(1.04) translateY(-4px); /* Keep scale and apply translation */
+  border-color: var(--color-accent);
+}
+
+.popular-ribbon {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--color-accent);
+  color: #FFFFFF;
+  font-family: 'Satoshi', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 6px 18px;
+  border-radius: 100px;
+  box-shadow: 0 4px 10px rgba(0, 102, 255, 0.4);
+}
+
+/* Cost Info Grid */
+.card-top {
+  border-bottom: 1px solid var(--border-glass);
+  padding-bottom: 30px;
+}
+
+.card-top h3 {
+  font-family: 'Clash Display', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 6px;
+}
+
+.tier-ideal-text {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-bottom: 24px;
+}
+
+.pricing-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.setup-cost, .retainer-cost {
+  display: flex;
+  flex-direction: column;
+}
+
+.cost-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.cost-value {
+  font-family: 'Clash Display', sans-serif; /* Spec: Price font 48px Clash Display */
+  font-size: 36px;
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1;
+}
+
+.cost-period {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Feature checklist styling */
+.card-middle {
+  flex: 1;
+  padding: 30px 0;
+}
+
+.checklist-header {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #FFFFFF;
+  margin-bottom: 16px;
+}
+
+.tier-checklist {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tier-checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-family: 'Satoshi', sans-serif;
+  font-size: 13px; /* Feature list 13px Satoshi */
+  line-height: 1.4;
+}
+
+.tier-checklist li.included {
+  color: var(--text-primary);
+}
+
+.tier-checklist li.excluded {
+  color: var(--text-muted);
+  opacity: 0.5;
+}
+
+.feature-icon-check {
+  color: var(--color-success);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.feature-icon-cross {
+  color: var(--text-muted);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+/* Pricing Card Button */
+.card-bottom {
+  padding-top: 20px;
+}
+
+.pricing-cta-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 12px;
+  font-family: 'Satoshi', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.btn-outline-pricing {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+}
+
+.btn-outline-pricing:hover {
+  border-color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Trust Footer styling */
+.pricing-trust-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+.trust-footer-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  border-radius: 100px;
+  background: rgba(10, 37, 64, 0.4);
+  border: 1px solid var(--border-glass);
+}
+
+.trust-dot {
+  color: var(--color-accent);
+  font-size: 8px;
+}
+
+.trust-footer-pill span {
+  font-family: 'Satoshi', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+/* Responsiveness */
+@media (max-width: 991px) {
+  .pricing-grid-3 {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 40px;
+  }
+  
+  .recommended-highlight {
+    transform: none;
+  }
+  
+  .recommended-highlight:hover {
+    transform: translateY(-4px);
+  }
+}

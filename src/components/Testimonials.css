@@ -1,0 +1,144 @@
+.testimonials-section {
+  background-color: var(--color-dominant);
+  padding: 120px 0;
+  overflow: hidden;
+  position: relative;
+  z-index: 10;
+}
+
+.testimonials-marquee-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  position: relative;
+  mask-image: linear-gradient(to right, transparent, #000 80px, #000 calc(100% - 80px), transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 80px, #000 calc(100% - 80px), transparent);
+}
+
+.t-marquee-track {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  width: 100%;
+}
+
+.t-marquee-content {
+  display: flex;
+  gap: 20px;
+  flex-shrink: 0;
+  white-space: normal; /* Allow text wrapping in cards */
+}
+
+/* Row 1 - Left scrolling keyframe */
+@keyframes tScrollLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-33.33%); }
+}
+
+/* Row 2 - Right scrolling keyframe */
+@keyframes tScrollRight {
+  0% { transform: translateX(-33.33%); }
+  100% { transform: translateX(0); }
+}
+
+.t-scroll-left .t-marquee-content {
+  animation: tScrollLeft 45s linear infinite;
+}
+
+.t-scroll-right .t-marquee-content {
+  animation: tScrollRight 45s linear infinite;
+}
+
+.t-marquee-track:hover .t-marquee-content {
+  animation-play-state: paused;
+}
+
+/* Testimonial Card Styling (White Card, dark typography) */
+.testimonial-card {
+  width: 280px;
+  min-height: 200px;
+  background: #FFFFFF; /* White background as per AI prompt */
+  color: #1F2937; /* Dark gray text */
+  border-radius: 12px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-2px);
+}
+
+.t-stars {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 12px;
+}
+
+.t-quote {
+  font-family: 'Satoshi', sans-serif;
+  font-size: 13px; /* Satoshi 13px */
+  font-style: italic; /* italic 14px/13px */
+  font-weight: 500;
+  color: #374151; /* Charcoal */
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+.t-divider {
+  height: 1px;
+  background-color: #E5E7EB; /* Light grey divider */
+  margin-bottom: 12px;
+}
+
+.t-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.t-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: rgba(0, 102, 255, 0.1);
+  border: 1px solid rgba(0, 102, 255, 0.2);
+  color: var(--color-accent);
+  font-family: 'Clash Display', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.t-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.t-name {
+  font-family: 'Satoshi', sans-serif;
+  font-size: 13px; /* Name bold 13px */
+  font-weight: 700;
+  color: #111827; /* Darkest gray */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.t-role {
+  font-family: 'Satoshi', sans-serif;
+  font-size: 11px; /* role/company 12px/11px gray */
+  color: #6B7280; /* Gray */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

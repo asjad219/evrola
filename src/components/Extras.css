@@ -1,0 +1,157 @@
+@keyframes phonePulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.emergency-ribbon {
+  height: 44px;
+  background: #EF4444;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+  font-family: 'Satoshi', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(239, 68, 68, 0.2);
+}
+
+.ribbon-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.ribbon-text-link {
+  color: #FFFFFF;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  transition: opacity 0.2s ease;
+}
+
+.ribbon-text-link:hover {
+  opacity: 0.9;
+}
+
+.ribbon-text {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.phone-pulse-icon {
+  animation: phonePulse 0.8s ease-in-out infinite;
+}
+
+.ribbon-close-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.ribbon-close-btn:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Mobile Sticky Bottom Bar */
+.mobile-sticky-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9998;
+  padding: 12px 16px;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  background: #0D1B2A;
+  border-top: 1px solid var(--border-glass);
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
+  display: none;
+}
+
+.sticky-bar-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.sticky-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 10px;
+  border-radius: 12px;
+  font-family: 'Satoshi', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease;
+}
+
+/* Call Button (accent electric blue) */
+.btn-call {
+  background: var(--color-accent);
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(0, 102, 255, 0.3);
+}
+
+.btn-call:active {
+  transform: translateY(1px);
+}
+
+/* Chat Button (warning orange) */
+.btn-chat {
+  background: var(--color-warning);
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+.btn-chat:active {
+  transform: translateY(1px);
+}
+
+.chat-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #FFFFFF;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 8px #FFFFFF;
+}
+
+/* Hide on desktop, show on mobile */
+@media (max-width: 991px) {
+  .mobile-sticky-bar.mobile-only {
+    display: block;
+  }
+  
+  body {
+    padding-bottom: 80px; /* Make space for sticky bar */
+  }
+}
+
+@media (min-width: 992px) {
+  .desktop-only {
+    display: flex;
+  }
+}

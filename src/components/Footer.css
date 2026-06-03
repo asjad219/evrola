@@ -1,0 +1,234 @@
+.footer-wrapper {
+  background-color: #0A0A0A; /* Spec: Footer: #0A0A0A */
+  border-top: 1px solid var(--border-glass);
+  position: relative;
+  z-index: 10;
+}
+
+/* CTA Banner - Section 9 (The Close) */
+.footer-cta-banner {
+  background-color: var(--color-accent); /* Electric blue BG: #0066FF */
+  padding: 80px 0; /* Spec: CTA banner padding: 80px vertical */
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 -4px 30px rgba(0, 102, 255, 0.2);
+}
+
+.cta-banner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.footer-cta-banner h2 {
+  font-family: 'Clash Display', sans-serif; /* Spec: white Clash Display 36px headline */
+  font-size: clamp(28px, 4vw, 36px);
+  color: #FFFFFF;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+/* Outlined White Button */
+.btn-outlined-white {
+  background: transparent;
+  color: #FFFFFF;
+  border: 2px solid #FFFFFF; /* Spec: white outlined button */
+  font-family: 'Satoshi', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 14px 28px;
+  border-radius: 12px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.btn-outlined-white:hover {
+  background: #FFFFFF;
+  color: var(--color-accent);
+  box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Main Footer Columns */
+.footer-main {
+  padding: 80px 0 60px 0; /* Spec: Footer padding: 60px vertical */
+}
+
+.footer-grid-3 {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 60px;
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-logo-text {
+  font-family: 'Clash Display', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: #FFFFFF;
+}
+
+.footer-tagline {
+  font-family: 'Satoshi', sans-serif;
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 320px;
+}
+
+.footer-social {
+  display: flex;
+  gap: 16px;
+}
+
+.footer-social a {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-glass);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+}
+
+.footer-social a:hover {
+  color: #FFFFFF;
+  background: rgba(0, 102, 255, 0.1);
+  border-color: rgba(0, 102, 255, 0.3);
+}
+
+.footer-col h4 {
+  font-family: 'Clash Display', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-col ul a {
+  font-family: 'Satoshi', sans-serif; /* Spec: Satoshi 14px links */
+  font-size: 14px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-col ul a:hover {
+  color: #FFFFFF;
+}
+
+.footer-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Satoshi', sans-serif;
+  font-size: 14px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-contact-item:hover {
+  color: #FFFFFF;
+}
+
+/* Bottom bar */
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 30px 0;
+}
+
+.footer-bottom-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-bottom p {
+  font-family: 'Satoshi', sans-serif;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.footer-legal-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Satoshi', sans-serif;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.footer-legal-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-legal-links a:hover {
+  color: var(--text-muted);
+}
+
+.legal-dot {
+  opacity: 0.3;
+}
+
+.blue-square {
+  color: var(--color-accent);
+}
+
+/* Responsiveness */
+@media (max-width: 991px) {
+  .footer-grid-3 {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-bottom-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .footer-legal-links {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .legal-dot {
+    display: none;
+  }
+}
